@@ -10,7 +10,6 @@ CFL = 0.5
 
 
 
-@njit(parallel=True)
 def update(Qnew, dt, dx, dy, nx, ny, Fh, Gh,fb):
     for j in prange(1, ny - 1):
         for i in prange(1, nx - 1):
@@ -93,7 +92,7 @@ def forceFluid(dx,dy,nx,ny,X0,dtheta):
 
     Fk=_curve_force(X0,dtheta)
     (p,_)=X0.shape
-    Fb=np.zeros((nx,ny,2))
+    Fb=np.zeros((nx,ny,4))
     print("DONE")
     for i in range(nx):
         for j in range(ny):
@@ -106,7 +105,8 @@ def forceFluid(dx,dy,nx,ny,X0,dtheta):
                 w=SixPointDelta(d)/(dx*dy)
                 Fl=w*Fk[k,:]*dtheta
                 ftemp+=Fl
-            Fb[i,j,:]=ftemp
+            Fb[i,j,1]=ftemp[0]
+            Fb[i,j,2]=ftemp[1]
 
     return Fb
 
@@ -298,3 +298,4 @@ if __name__ =="__main__":
     xs,dtheta=generate_circile(1,10)
     results = simulation(r0, u0, v0, E0, p0, c0,
                          dx, dy, ny, nx,xs,.3,dtheta)
+    print("DONE")
