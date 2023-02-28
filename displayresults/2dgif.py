@@ -43,6 +43,5 @@ with contextlib.ExitStack() as stack:
     # extract  first image from iterator
     img = next(imgs)
 
-    # https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#gif
     img.save(fp=fp_out, format='GIF', append_images=imgs,
              save_all=True, duration=200, loop=0)

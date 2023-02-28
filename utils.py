@@ -7,6 +7,8 @@ CFL = 0.5
 
 
 
+
+
 @njit(parallel=True)
 def update(Qnew, dt, dx, dy, nx, ny, Fh, Gh):
     for j in prange(1, ny - 1):
