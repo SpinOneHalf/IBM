@@ -110,7 +110,7 @@ def forceFluid(dx,dy,nx,ny,X0,dtheta):
 
     return Fb
 
-def _curve_force(xs,dthe,K=1):
+def _curve_force(xs,dthe,K=0.01):
     k,_=xs.shape
     tempf=np.zeros((k,2))
     for i in range(1,k-1):
@@ -127,7 +127,7 @@ def forcesBody(Qnew,X0,
     u = Qnew[:, :, 1] / r
     v = Qnew[:, :, 2] / r
     points_n,_=X0.shape
-    print("DONE")
+
     vs=np.zeros((points_n,2))
     for i in range(points_n):
         temp_x=X0[i,:]
